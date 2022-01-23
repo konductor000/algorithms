@@ -4,17 +4,17 @@ def solve():
     inf = 10 ** 10
     d = [inf for i in range(n + 1)]
     p = [-1 for i in range(n + 1)]
-    for i in range(m):
-        e.append([int(i) for i in input().split()])
+    for j in range(m):
+        e.append([int(i) for i in input().split()])  # a b l
 
     s, to = [int(i) for i in input().split()]
     d[s] = 0
+    x = -1
 
     for i in range(n):
-        if i == n - 1:
-            print(-1)
-            return
         change = 0
+        # if i == n - 1 .. negative cycle exists
+        x = -1
         for j in range(m):
             a, b, l = e[j][0], e[j][1], e[j][2]
             if d[a] < inf:
@@ -22,21 +22,41 @@ def solve():
                     change = 1
                     p[b] = a
                     d[b] = d[a] + l
+                    x = b
 
         if not change:
             break
 
-    if d[to] == inf:
-        print(-2)
-        return
-    path = []
-    v = to
-    while v != -1:
-        path.append(v)
-        v = p[v]
+    if d[to] == inf:  # doesn't work if there is negative cycle
+        print("No path!")
+    else:
+        path = []
+        v = to
+        while v != -1:
+            path.append(v)
+            v = p[v]
 
-    path.reverse()
-    print(path)
+        path.reverse()
+        print(path)
+
+    # if you need to find negative cycle
+
+    if x == -1:
+        print("No negative cycle")
+    else:
+        path = []
+        v = x
+        for i in range(1, n + 1):
+            v = p[v]
+
+        cur = v
+        while len(path) <= 1 or cur != v:
+            path.append(cur)
+            cur = p[cur]
+
+        path.reverse()
+
+        print(path)
 
 
 solve()
