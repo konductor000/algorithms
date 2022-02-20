@@ -55,7 +55,7 @@ def solve():
     q = int(input())
     for i in range(q):
         a, b = [int(i) for i in input().split()]
-        print(lca(a, b, s))
+        print(a, b, lca(a, b, s))
 
 
 solve()
