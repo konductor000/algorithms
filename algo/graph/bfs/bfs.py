@@ -15,6 +15,7 @@ q = deque()
 
 q.append(v)
 used = [0 for i in range(len(g))]
+path = [0 for i in range(len(g))]
 used[v] = 1
 
 while len(q):
@@ -23,6 +24,7 @@ while len(q):
 		to = g[v][i]
 		if not used[to]:
 			used[to] = 1
+			path[to] = path[v] +  1
 			q.append(to)
 
 
