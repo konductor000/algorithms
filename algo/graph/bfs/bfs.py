@@ -13,6 +13,7 @@ v = 1
 
 q = deque()
 
+q.append(v)
 used = [0 for i in range(len(g))]
 used[v] = 1
 
